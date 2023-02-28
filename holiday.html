@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="holiday.css">
+    <title>Document</title>
+</head>
+<body>
+    <p id="holiday"></p>
+    <button onclick="getHoliday()">show</button>
+    <script>
+        const years = document.getElementById('year')
+        const hols = document.getElementById('hol')
+        const holidays = document.getElementById('holiday')
+        fetch('https://api.api-ninjas.com/v1/holidays?country=Georgia&year=2021&type=season',{
+            method: 'GET',
+            headers: { 
+                    'X-Api-Key': 'HxctiSn3lzO3WoUMuHKRKETL8dHnmwUpMsN4YVN9'
+                },
+        }).then(async(data)=> {
+            const result = await data.json();
+            let html = '';
+            html = `${html}<p class='one'>${result[0].country}</p><p>${result[0].iso}</p><p>${result[0].year}</p>`;
+
+            holidays.innerHTML = html;
+        })
+    </script>
+</body>
+</html>
